@@ -66,13 +66,11 @@ function checkUpdates(rulesInput, updatesInput) {
     let totalMiddleSum = 0;
 
     for (const update of updates) {
-        // Create a local graph and indegree map for the current update
         const localGraph = new Graph();
         
-        // Create a local indegree map
+ 
         const localIndegree = new Map();
         
-        // Add edges only for pages present in the current update
         for (const [src, dest] of rules) {
             if (update.includes(src) && update.includes(dest)) {
                 localGraph.addEdge(src, dest);
@@ -81,10 +79,8 @@ function checkUpdates(rulesInput, updatesInput) {
             }
         }
 
-        // Perform topological sort on the local graph
         const sortedOrder = localGraph.topologicalSort(update);
 
-        // Check if sorted order matches original update
         if (JSON.stringify(sortedOrder) === JSON.stringify(update)) {
             const middleIndex = Math.floor(update.length / 2);
             const middlePage = update.length % 2 === 0 ? update[middleIndex - 1] : update[middleIndex];
@@ -95,14 +91,12 @@ function checkUpdates(rulesInput, updatesInput) {
     return totalMiddleSum;
 }
 
-// Read input from List1.txt and List2.txt
 try {
     const rulesInput = fs.readFileSync('List1.txt', 'utf-8');
     const updatesInput = fs.readFileSync('List2.txt', 'utf-8');
 
-    // Calculate and print result
     const result = checkUpdates(rulesInput, updatesInput);
-    console.log(result); // Output should be the sum of middle page numbers from correctly ordered updates.
+    console.log(result); 
 } catch (error) {
     console.error('Error reading files:', error);
 }
