@@ -6,8 +6,7 @@ fs.readFile('List.txt', 'utf8', (err, data) => {
         return;
     }
 
-    const lines = data.trim().split(/\n/).map(row => row.split(/\s+/));
-    const reports = lines.map(row => row.map(Number));
+    const reports = data.trim().split('\n').map(line => line.split(/\s+/).map(Number));
 
     let totalSafeReports = 0;
 
@@ -27,7 +26,6 @@ fs.readFile('List.txt', 'utf8', (err, data) => {
 
     console.log(`Total Safe Reports: ${totalSafeReports}`);
 });
-
 
 function isSafe(report) {
     let isAscending = true;
