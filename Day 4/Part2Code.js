@@ -82,7 +82,7 @@ async function readFileAndProcess(filePath) {
 }
 
 function main() {
-    const filePath = 'List.txt'; // Path to your grid data file
+    const filePath = 'List.txt'; 
     readFileAndProcess(filePath).catch(err => console.error(err));
 }
 
